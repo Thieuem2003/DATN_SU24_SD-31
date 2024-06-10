@@ -11,22 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class AccountRequest {
+public class PasswordRequest {
 
     private Long id;
 
-    private Integer roleId;
+    private String yourOldPassword;
 
-    private String name;
+    private String newPassword;
 
-    private String email;
-
-    private String password;
-
-    private String avatar;
-
-    private Integer status;
-
-    private String code;
+    private String enterNewPassword;
 
 }

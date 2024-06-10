@@ -1,4 +1,4 @@
-package com.backend.dto.request;
+package com.backend.dto.request.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,25 +8,19 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 @Builder
-public class AccountRequest {
-
-    private Long id;
-
-    private Integer roleId;
-
+public class SearchAccountRequest {
     private String name;
 
     private String email;
 
-    private String password;
+    private Integer role;
 
-    private String avatar;
+    private Integer statusAccount;
 
-    private Integer status;
+    private int page;
 
-    private String code;
-
+    private int size;
 }

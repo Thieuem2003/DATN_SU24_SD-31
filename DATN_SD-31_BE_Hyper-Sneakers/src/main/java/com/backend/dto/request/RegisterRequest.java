@@ -11,22 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class AccountRequest {
-
-    private Long id;
-
-    private Integer roleId;
-
+public class RegisterRequest {
     private String name;
-
     private String email;
-
     private String password;
-
-    private String avatar;
-
-    private Integer status;
-
-    private String code;
-
+    private Integer idRole;
 }
