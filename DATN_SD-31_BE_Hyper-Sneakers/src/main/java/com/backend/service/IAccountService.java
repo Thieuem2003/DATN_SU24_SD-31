@@ -1,5 +1,6 @@
 package com.backend.service;
 
+import com.backend.ServiceResult;
 import com.backend.dto.request.AccountRequest;
 import com.backend.dto.request.RegisterRequest;
 import com.backend.dto.request.account.AccountAddress;
@@ -16,7 +17,7 @@ public interface IAccountService {
 
     List<AccountAddress> getAllAddressAndAccount(Long id);
 
-    Account getOneAccount(Long id);
+    ServiceResult<Account>getOneAccount(Long id);
 
     Account findByEmailAccount(String email);
 
@@ -33,4 +34,6 @@ public interface IAccountService {
     Account activeAccount(AccountRequest accountRequest);
 
     AccountPageResponse findAllAccount(int pageNo, int pageSize);
+
+    AccountResponse result(String mess);
 }
