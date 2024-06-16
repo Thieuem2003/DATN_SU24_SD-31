@@ -35,7 +35,7 @@ public class Role {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "name",length = 20)
+    @Column(name = "name", length = 20)
     private ERole name;
 
     @CreationTimestamp
@@ -48,7 +48,6 @@ public class Role {
 
     @Column(name = "status")
     private Integer status;
-
 
 
 }
