@@ -12,13 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
-public class ServiceResult<T> implements Serializable {
-    private int status;
-    private String message;
-    private T data;
-
-=======
-import java.io.Serializable;
 
 public class ServiceResult<T> implements Serializable {
 
@@ -27,15 +20,6 @@ public class ServiceResult<T> implements Serializable {
     private String message;
 
     private T data;
-
-    public ServiceResult() {
-    }
-
-    public ServiceResult(int status, String message, T data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
-    }
 
     public ServiceResult(int status, String message) {
         this.status = status;
