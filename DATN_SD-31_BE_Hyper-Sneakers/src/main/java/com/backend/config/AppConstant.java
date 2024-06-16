@@ -1,7 +1,6 @@
 package com.backend.config;
 
 public class AppConstant {
-
     public static final int SUCCESS = 00;
 
     public static final int FAIL = 01;
