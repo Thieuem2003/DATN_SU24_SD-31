@@ -2,6 +2,7 @@ package com.backend.repository;
 
 import com.backend.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,14 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Query("select a from Account a where " +
             " a.status = 1 ")
     List<Account> getAllAccount();
+
+public interface AccountRepository extends JpaRepository<Account, Integer> {
+
+    Account findByName(String tenTaiKhoan);
+
+    Account findByEmail(String email);
+
+    Boolean existsByName(String tenTaiKhoan);
+
+    Boolean existsByEmail(String email);
 }
