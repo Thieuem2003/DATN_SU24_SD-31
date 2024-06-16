@@ -18,59 +18,59 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class WebSecurityConfig {
-
-    @Autowired
-    private CustomUserDetailService userDetailService;
-
-    @Autowired
-    private AuthEntryPointJwt authEntryPoint;
-
-    @Bean
-    public JwtAuthFilter jwtAuthFilter() {
-        return new JwtAuthFilter();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-        authProvider.setUserDetailsService(userDetailService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-
-        return authProvider;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        //Get AuthenticationManager bean
-        return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        // password encoder,  để Spring security sử dụng mã hoá mật khẩu người dùng
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(("/signin")).permitAll() // cho phép tất cả truy cập
-                        .requestMatchers("/signup").permitAll()
-                        .requestMatchers("/home").permitAll()
-                        .anyRequest().authenticated() // tất cả các request khác đề phải xác thực mới vào đc
-                );
-
-        http.authenticationProvider(authenticationProvider());
-
-        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
+//
+//    @Autowired
+//    private CustomUserDetailService userDetailService;
+//
+//    @Autowired
+//    private AuthEntryPointJwt authEntryPoint;
+//
+//    @Bean
+//    public JwtAuthFilter jwtAuthFilter() {
+//        return new JwtAuthFilter();
+//    }
+//
+//    @Bean
+//    public DaoAuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//
+//        authProvider.setUserDetailsService(userDetailService);
+//        authProvider.setPasswordEncoder(passwordEncoder());
+//
+//        return authProvider;
+//    }
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+//        //Get AuthenticationManager bean
+//        return authConfig.getAuthenticationManager();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        // password encoder,  để Spring security sử dụng mã hoá mật khẩu người dùng
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf(AbstractHttpConfigurer::disable)
+//                .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint))
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(("/signin")).permitAll() // cho phép tất cả truy cập
+//                        .requestMatchers("/signup").permitAll()
+//                        .requestMatchers("/home").permitAll()
+//                        .anyRequest().authenticated() // tất cả các request khác đề phải xác thực mới vào đc
+//                );
+//
+//        http.authenticationProvider(authenticationProvider());
+//
+//        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
 }

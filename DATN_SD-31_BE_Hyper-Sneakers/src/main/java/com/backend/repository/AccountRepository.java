@@ -25,13 +25,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
             " a.status = 1 ")
     List<Account> getAllAccount();
 
-public interface AccountRepository extends JpaRepository<Account, Integer> {
-
-    Account findByName(String tenTaiKhoan);
-
-    Account findByEmail(String email);
-
-    Boolean existsByName(String tenTaiKhoan);
-
-    Boolean existsByEmail(String email);
 }
+
