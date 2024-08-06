@@ -6,11 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-
-    @Query("SELECT c FROM Category c WHERE c.name = :nameCategory")
-    Optional<Category> findByNameCategory(@Param("nameCategory") String nameCategory);
+public interface CategoryRepository extends JpaRepository<Category,Integer> {
+    @Query(value = "Select e from Category e where e.Status = 0 order by e.CreateDate desc ")
+    public List<Category> getAll();
+    @Query(value = "Select e from Category e where e.Status = 0 and e.Name like :name")
+    public List<Category> searchByName(@Param("name") String name);
+    @Query(value = "select e from Category e where e.Id = :id")
+    public Category getById(@Param("id") Integer Id);
 }

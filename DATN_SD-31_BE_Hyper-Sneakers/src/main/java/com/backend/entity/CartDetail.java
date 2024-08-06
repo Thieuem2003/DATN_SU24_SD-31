@@ -1,42 +1,47 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "cart_detail")
-public class CartDetail {
-
-    @Id
+@Builder
+@Table(name = "CartDetail")
+public class CartDetail implements Serializable {
+    @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "status")
-    private Integer status;
-
+    @Column(name = "Id")
+    private Integer Id;
+    @Column(name = "UnitPrice")
+    private BigDecimal UnitPrice;
+    @Column(name = "Quantity")
+    private Integer Quantity;
+    @Column(name = "IdColor")
+    private Integer IdColor;
+    @Column(name = "IdSize")
+    private Integer IdSize;
     @ManyToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "IdCart")
+    @JsonBackReference
     private Cart cart;
-
     @ManyToOne
-    @JoinColumn(name = "shoe_detail_id")
-    private ShoeDetail shoeDetail;
+    @JoinColumn(name = "IdProductDetail")
+    private ProductDetail productDetail;
 }

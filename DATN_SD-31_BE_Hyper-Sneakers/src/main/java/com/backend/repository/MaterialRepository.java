@@ -6,10 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
-public interface MaterialRepository extends JpaRepository<Material, Long> {
-    @Query("SELECT m FROM Material m WHERE m.name =:mateName")
-    Optional<Material>findByNameMaterial(@Param("mateName") String name);
+public interface MaterialRepository extends JpaRepository<Material,Integer> {
+    @Query(value = "Select e from Material e where e.Status = 0 order by e.CreateDate desc ")
+    public List<Material> getAll();
+    @Query(value = "Select e from Material e where e.Status = 0 and e.Name like :name")
+    public List<Material> searchByName(@Param("name") String name);
+    @Query(value = "select e from Material e where e.Id = :id")
+    public Material getById(@Param("id") Integer Id);
 }
