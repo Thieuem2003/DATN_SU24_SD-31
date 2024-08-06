@@ -1,53 +1,55 @@
 package com.backend.entity;
 
-import com.backend.entity.login.ERole;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "role")
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class Role {
-    @Id
+@Table(name = "Role")
+public class Role implements Serializable {
+    @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "name", length = 20)
-    private ERole name;
-
-    @CreationTimestamp
-    @Column(name = "created_time")
-    private Date createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_time")
-    private Date updatedAt;
-
-    @Column(name = "status")
-    private Integer status;
-
-
+    @Column(name = "Id")
+    private Integer Id;
+    @Column(name = "CreateDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date CreateDate;
+    @Column(name = "UpdateDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date UpdateDate;
+    @Column(name = "CreateBy")
+    private String CreateBy;
+    @Column(name = "UpdateBy")
+    private String UpdateBy;
+    @Column(name = "Status")
+    private Integer Status;
+    @Column(name = "Name")
+    private String Name;
+    @JsonIgnore
+    @OneToMany(mappedBy = "role")
+    private Set<Employee> employees = new HashSet<Employee>();
 }
