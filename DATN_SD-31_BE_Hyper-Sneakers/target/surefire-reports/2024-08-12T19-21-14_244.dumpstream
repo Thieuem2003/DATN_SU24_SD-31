@@ -1,0 +1,5 @@
+# Created at 2024-08-12T19:21:17.720
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Project\DATN_SU24_SD-31\DATN_SD-31_BE_Hyper-Sneakers\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
