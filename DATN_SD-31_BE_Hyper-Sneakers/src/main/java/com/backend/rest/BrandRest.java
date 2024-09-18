@@ -1,9 +1,13 @@
 package com.backend.rest;
 
+import com.backend.entity.Brand;
+import com.backend.entity.Material;
 import com.backend.request.BrandRequest;
 import com.backend.service.BrandService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -39,11 +43,16 @@ public class BrandRest {
         return ResponseEntity.ok(service.getById(id));
     }
     @PostMapping()
-    public ResponseEntity<?> add(@Valid @RequestBody BrandRequest request, BindingResult result){
-        if (result.hasErrors()){
+    public ResponseEntity<?> add(@Valid @RequestBody BrandRequest request, BindingResult result) {
+        if (result.hasErrors()) {
             List<ObjectError> list = result.getAllErrors();
             return ResponseEntity.badRequest().body(list);
         }
+        if (service.isBrandExist(request.getName())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("{\"message\": \"Thương hiệu đã tồn tại\"}");
+        }
+
         return ResponseEntity.ok(service.add(request));
     }
     @PutMapping("/update/{id}")

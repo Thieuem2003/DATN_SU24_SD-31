@@ -4,6 +4,7 @@ import com.backend.request.SoleTypeRequest;
 import com.backend.service.SoleTypeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -42,6 +43,10 @@ public class SoleTypeRest {
         if (result.hasErrors()){
             List<ObjectError> list = result.getAllErrors();
             return ResponseEntity.badRequest().body(list);
+        }
+        if (service.isBrandExist(soleType.getName())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("{\"message\": \"Đế giày đã tồn tại\"}");
         }
         return ResponseEntity.ok(service.add(soleType));
     }

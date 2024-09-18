@@ -1,6 +1,7 @@
 package com.backend.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 @Getter
@@ -8,7 +9,7 @@ import lombok.Setter;
 public class EmployeeRequest{
     @NotBlank(message = "Không được bỏ trống Code")
     private String Code;
-    @NotBlank(message = "Không được bỏ trống Tên")
+    @Pattern(regexp = "^[A-Za-z]+(?:\\s[A-Za-z]+)*$",message = "Tên không đúng định dạng")
     private String Fullname;
     @NotBlank(message = "Không được bỏ trống UserName")
     private String Username;

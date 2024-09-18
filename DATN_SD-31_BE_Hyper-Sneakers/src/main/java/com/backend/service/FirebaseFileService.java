@@ -27,7 +27,7 @@ public class FirebaseFileService {
     @EventListener
     public void init(ApplicationReadyEvent event) {
         try {
-            ClassPathResource serviceAccount = new ClassPathResource("firebase-service-account-key.json");
+            ClassPathResource serviceAccount = new ClassPathResource("firebase-service-account-key.txt");
             storage = StorageOptions.newBuilder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount.getInputStream()))
                     .setProjectId("hyper-sneaker").build().getService();
@@ -63,7 +63,7 @@ public class FirebaseFileService {
         try {
             String fileName = 
             url.replace("https://firebasestorage.googleapis.com/v0/b/hyper-sneaker.appspot.com/o/", "").replace("?alt=media", "");
-            ClassPathResource serviceAccount = new ClassPathResource("firebase-service-account-key.json");
+            ClassPathResource serviceAccount = new ClassPathResource("firebase-service-account-key.txt");
             String projectId = "hyper-sneaker";
             Storage storage = StorageOptions.newBuilder()
                     .setProjectId(projectId)
