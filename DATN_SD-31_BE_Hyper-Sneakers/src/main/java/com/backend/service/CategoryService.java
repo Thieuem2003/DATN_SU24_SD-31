@@ -43,4 +43,8 @@ public class CategoryService {
         Category category = repository.getById(Id);
         return category;
     }
+    public boolean isBrandExist(String name) {
+        List<Category> brands = repository.searchByName(name);
+        return !brands.isEmpty();
+    }
 }

@@ -1,9 +1,13 @@
 package com.backend.rest;
 
+import com.backend.entity.Category;
+import com.backend.entity.Material;
 import com.backend.request.CategoryRequest;
 import com.backend.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -39,10 +43,16 @@ public class CategoryRest {
     }
     @PostMapping()
     public ResponseEntity<?> add(@Valid @RequestBody CategoryRequest category, BindingResult result){
-        if (result.hasErrors()){
+
+        if (result.hasErrors()) {
             List<ObjectError> list = result.getAllErrors();
             return ResponseEntity.badRequest().body(list);
         }
+        if (service.isBrandExist(category.getName())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("{\"message\": \"Danh mục đã tồn tại\"}");
+        }
+
         return ResponseEntity.ok(service.add(category));
     }
     @PutMapping("/update/{id}")

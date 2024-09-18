@@ -44,4 +44,8 @@ public class SizeService {
         Size size = repository.getById(Id);
         return size;
     }
+    public boolean isBrandExist(String name) {
+        List<Size> brands = repository.searchByName(name);
+        return !brands.isEmpty();
+    }
 }

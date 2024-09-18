@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BrandRepository extends JpaRepository<Brand,Integer> {
@@ -14,6 +15,7 @@ public interface BrandRepository extends JpaRepository<Brand,Integer> {
     public List<Brand> getAll();
     @Query(value = "Select e from Brand e where e.Status = 0 and e.Name like :name")
     public List<Brand> searchByName(@Param("name") String name);
-    @Query(value = "select e from Brand e where e.Id = :id")
-    public Brand getById(@Param("id") Integer Id);
+    @Query("SELECT e FROM Brand e WHERE e.Id = :id")
+    Optional<Brand> getBrandById(@Param("id") Integer id);
 }
+

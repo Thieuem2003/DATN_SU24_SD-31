@@ -43,4 +43,8 @@ public class SoleTypeService {
     	SoleType soleType = repository.getById(Id);
         return soleType;
     }
+    public boolean isBrandExist(String name) {
+        List<SoleType> brands = repository.searchByName(name);
+        return !brands.isEmpty();
+    }
 }

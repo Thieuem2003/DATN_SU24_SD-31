@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MaterialService {
@@ -43,5 +44,9 @@ public class MaterialService {
     public Material getById(Integer Id){
         Material material = repository.getById(Id);
         return material;
+    }
+    public boolean isBrandExist(String name) {
+        List<Material> brands = repository.searchByName(name);
+        return !brands.isEmpty();
     }
 }

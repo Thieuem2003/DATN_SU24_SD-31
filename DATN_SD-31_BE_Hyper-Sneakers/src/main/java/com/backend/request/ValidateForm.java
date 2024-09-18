@@ -17,6 +17,7 @@ public class ValidateForm {
     @NotBlank(message = "Tên không được bỏ trống !")
     @Size(max = 100,message = "Tên có độ dài nhỏ hơn hoặc bằng 100 kí tự")
     @Size(min = 10,message = "Tên lớn hơn 10 kí tự")
+    @Pattern(regexp = "^[A-Za-z]+(?:\\s[A-Za-z]+)*$",message = "Tên không đúng định dạng")
     private String Name;
     @NotBlank(message = "Giá bán không được bỏ trống !")
     @Pattern(regexp = "^(?!0)([1-9]\\d{0,7}(?:\\.\\d{1,2})?|99999999(?:\\.0{1,2})?)$",message = "Giá bán phải là số lớn hơn 0 và nhỏ hơn 99,999,999 !")

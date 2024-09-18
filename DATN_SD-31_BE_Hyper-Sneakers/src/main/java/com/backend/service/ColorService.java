@@ -47,4 +47,8 @@ public class ColorService {
         Color color = repository.getById(Id);
         return color;
     }
+    public boolean isBrandExist(String name) {
+        List<Color> brands = repository.searchByName(name);
+        return !brands.isEmpty();
+    }
 }

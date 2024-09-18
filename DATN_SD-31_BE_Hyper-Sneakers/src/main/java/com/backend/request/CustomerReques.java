@@ -1,6 +1,7 @@
 package com.backend.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ public class CustomerReques {
     @NotBlank(message = "Mã không được bỏ trống !")
     @Size(max = 100,message = " Ma  có độ dài nhỏ hơn hoặc bằng 100 kí tự")
     private String code;
-    @NotBlank(message = "Ten không được bỏ trống !")
+    @Pattern(regexp = "^[A-Za-z]+(?:\\s[A-Za-z]+)*$",message = "Tên không đúng định dạng")
     @Size(max = 100,message = " Ma có độ dài nhỏ hơn hoặc bằng 100 kí tự")
     private String fullname;
     @NotBlank(message = "Tai Khoan không được bỏ trống !")
